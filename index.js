@@ -3,6 +3,7 @@ let isAlive = false
 let hasBlackJack = false
 let sum = 0
 let count = 0
+let willingToContinue = false
 let cardsData = document.getElementById("card")
 let result = document.getElementById("content")
 let totalSum = document.getElementById("sum")
@@ -54,6 +55,7 @@ function resultConfirmation(){
         else if(sum === 21){
             result.textContent = "Congratualations! You have got a Blackjack"
             hasBlackJack=true
+            willingToContinue = true
             count = 0
             userDetails.chips *= 2
             userInfo.textContent = userDetails.fullName + ": $" + userDetails.chips
@@ -75,7 +77,7 @@ function resultConfirmation(){
 // Function to add a new card
 
 function newCard(){
-    if(isAlive === true && hasBlackJack === false){
+    if(isAlive === true && (hasBlackJack === false || willingToContinue === true)){
         let extraCard = getRandomNumber()
         cards.push(extraCard)
         sum += extraCard
